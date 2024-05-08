@@ -28,6 +28,7 @@
 		"@nextui-org/switch": "^2.0.28",
 		"@nextui-org/system": "2.1.0",
 		"@nextui-org/theme": "2.2.0",
+		"@prisma/client": "^5.13.0",
 		"@react-aria/ssr": "^3.9.2",
 		"@react-aria/visually-hidden": "^3.8.10",
 		"@types/node": "20.5.7",
@@ -62,6 +63,7 @@
 		"typescript": "^5.4.5"
 	},
 	"devDependencies": {
-		"@types/aos": "^3.0.7"
+		"@types/aos": "^3.0.7",
+		"prisma": "^5.13.0"
 	}
 }
