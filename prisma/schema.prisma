@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  uid String @id @default(uuid())
+  email String @unique
+  first_name String
+  middle_name String?
+  last_name String
+  phone_number String
+  password String
+  user_name String
+  gender String 
+  birthday DateTime
+  time_created DateTime @default(now())
+  updated_at DateTime @updatedAt @default(now())
+  reason String
+  profession String?
+  university String?
+  degree String?
+  interests String[]
+  is_team Boolean
+  photo_url String?
+  // group id relation
+  group BuddyGroup? @relation(fields:[group_id], references: [uid])
+  group_id String?
+  campaign Campaign[]
+  points Point[]
+
+
+}
+
+model BuddyGroup{
+  uid String @id @default(uuid())
+  group_name String
+  members User[]
+}
+
+model Campaign{
+   uid String @id @default(uuid())
+   campaign_name String
+   start_date DateTime
+   end_date DateTime
+   events Event[]
+   photos CampaignPhoto[]
+   creator User @relation(fields:[creator_id], references: [uid])
+   creator_id String
+  // creator
+}
+
+model Event{
+   uid String @id @default(uuid())
+   event_name String
+   start_date DateTime
+   end_date DateTime
+   campaign Campaign? @relation(fields: [campaign_id], references: [uid])
+   campaign_id String
+}
+
+model CampaignPhoto{
+   uid String @id @default(uuid())
+   caption String?
+   url String
+  campaign Campaign? @relation(fields: [campaign_id], references: [uid])
+   campaign_id String
+}
+
+model Point{
+   uid String @id @default(uuid())
+   points_earned Int
+   reason String
+   given_at DateTime @default(now())
+   given_by User @relation(fields: [giver_id], references: [uid])
+   giver_id String
+
+}
