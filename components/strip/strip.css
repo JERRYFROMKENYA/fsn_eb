@@ -1,0 +1,8 @@
+
+.StripClass img
+{
+    object-fit: cover;
+    height: .75rem;
+    display: block;
+    vertical-align: middle
+}

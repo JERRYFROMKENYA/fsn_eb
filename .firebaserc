@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "fanciedstorywebsite-prod",
+    "new": "fanciedstorywebsite-prod"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
