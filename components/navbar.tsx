@@ -28,6 +28,11 @@ import {
 import { useTheme } from 'next-themes'
 import { Logo,DarkLogo } from "@/components/icons";
 
+let needNav =true
+export function setNeedNav(state:boolean){
+	needNav=state
+
+}
 export const Navbar = () => {
 	const {theme} = useTheme();
 	const searchInput = (
@@ -50,9 +55,10 @@ export const Navbar = () => {
 			type="search"
 		/>
 	);
-
+	
 	return (
-		<NextUINavbar maxWidth="2xl" style={{minHeight:"50px"}} position="sticky">
+
+		needNav&&(<NextUINavbar maxWidth="2xl" style={{minHeight:"50px"}} position="sticky">
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="start">
 				<NavbarBrand as="li" className="gap-3 max-w-fit">
 					<NextLink className="flex justify-start items-center gap-1" href="/">
@@ -136,6 +142,6 @@ export const Navbar = () => {
 					))}
 				</div>
 			</NavbarMenu>
-		</NextUINavbar>
+		</NextUINavbar>)
 	);
 };

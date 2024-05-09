@@ -38,6 +38,7 @@ model User{
   group_id String?
   campaign Campaign[]
   points Point[]
+  photos CampaignPhoto[]
 
 
 }
@@ -73,8 +74,12 @@ model CampaignPhoto{
    uid String @id @default(uuid())
    caption String?
    url String
+   is_main Boolean
   campaign Campaign? @relation(fields: [campaign_id], references: [uid])
    campaign_id String
+    creator User @relation(fields:[creator_id], references: [uid])
+   creator_id String
+   
 }
 
 model Point{
@@ -82,7 +87,9 @@ model Point{
    points_earned Int
    reason String
    given_at DateTime @default(now())
-   given_by User @relation(fields: [giver_id], references: [uid])
-   giver_id String
+   given_to User @relation(fields: [user_id], references: [uid])
+   user_id String
+   given_by String
+
 
 }
