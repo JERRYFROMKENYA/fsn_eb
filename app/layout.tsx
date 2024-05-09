@@ -7,7 +7,7 @@ import { Navbar } from "@/components/navbar";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 import Footer from "@/components/footer/footer";
-
+import { Analytics } from "@vercel/analytics/react"
 export const metadata: Metadata = {
 	title: {
 		default: siteConfig.name,
@@ -41,6 +41,7 @@ export default function RootLayout({
 				)}
 			>
 				<Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
+					<Analytics/>
 					<div className="relative flex flex-col h-screen">
 						<Navbar />
 						<main className="container mx-auto max-w-[100vw] pt-16 px-1 flex-grow">
