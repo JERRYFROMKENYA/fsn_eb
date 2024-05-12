@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
+
 const prisma = new PrismaClient();
 
 export  async function POST(req: Request, res: Response) {
@@ -8,6 +9,7 @@ export  async function POST(req: Request, res: Response) {
         if(userData.action=="create"){
             try {
                 console.log(userData)
+           
         
                 const user = await prisma.user.create({
                     data: {

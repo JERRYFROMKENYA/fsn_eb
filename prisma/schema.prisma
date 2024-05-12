@@ -31,7 +31,7 @@ model User{
   university String?
   degree String?
   interests String[]
-  is_team Boolean
+  is_team Boolean @default(false)
   photo_url String?
   // group id relation
   group BuddyGroup? @relation(fields:[group_id], references: [uid])
@@ -42,6 +42,15 @@ model User{
 
 
 }
+
+// model UserPhoto{
+//   uid String @id @default(uuid())
+//   url String
+//   path String
+//   is_main Boolean
+//   user User @relation(fields: [user_id], references: [uid])
+//   user_id String @unique
+// }
 
 model BuddyGroup{
   uid String @id @default(uuid())
