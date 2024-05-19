@@ -21,8 +21,8 @@ model User{
   last_name String
   phone_number String
   password String
-  user_name String
-  gender String 
+  user_name String @unique
+  gender String
   birthday DateTime
   time_created DateTime @default(now())
   updated_at DateTime @updatedAt @default(now())

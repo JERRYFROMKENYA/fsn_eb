@@ -6,6 +6,7 @@ import Picnic from "@/components/picnic/picnic";
 import React from "react";
 import ConatctUs from "@/components/contactus/ContactUs";
 import Faq from "@/components/FAQ/Faq";
+import {Birthdays} from "@/components/Birthdays/Birthdays";
 
 
 export default function Home() {
@@ -17,6 +18,8 @@ export default function Home() {
 			<Picnic/>
 			<Strip/>
 			<Description/>
+			<Strip/>
+			<Birthdays/>
 			<Strip/>
 			<Socials/>
 			<ConatctUs />

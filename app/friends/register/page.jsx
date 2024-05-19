@@ -13,13 +13,17 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import {Card, CardBody, DateInput, Image, Radio, RadioGroup} from "@nextui-org/react";
-import {upload, put} from '@vercel/blob/client';
+import {upload} from '@vercel/blob/client';
 import {Input, Textarea} from "@nextui-org/input";
 import bcrypt from 'bcryptjs';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import {  ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "@/firebase/fbConfigSetter.jsx"
-import {Backdrop} from "@mui/material";
+import {Backdrop, Fab} from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
+import CheckIcon from '@mui/icons-material/Check';
+import SaveIcon from '@mui/icons-material/Save';
+
+import {useRouter} from 'next/navigation';
 
 const input_theme={
     label: "text-black/50 dark:text-white/90",
@@ -273,6 +277,7 @@ function FSNCard(props){
 
 
 function VerticalLinearStepper() {
+    const router = useRouter();
     //card 1
     const [Email, setEmail] = useState()
     const [FirstName, setFirstName] = useState()
@@ -292,8 +297,18 @@ function VerticalLinearStepper() {
     //card 3
     const [Username, setUsername]=useState()
     const [Password, setPassword]=useState()
+    //
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
 
-
+    const buttonSx = {
+        ...(success && {
+            bgcolor: green[500],
+            '&:hover': {
+                bgcolor: green[700],
+            },
+        }),
+    };
     
     const steps = [
         {
@@ -338,20 +353,6 @@ function VerticalLinearStepper() {
 
 
 
-
-    const handleImageUpload = async () => {
-        if (image) {
-            const file = image;
-            const maxSize = 1 * 1024 * 1024; // 1MB
-            if (file.size > maxSize) {
-                // Compress the image if it's above 1MB
-                const compressedImage = await compressImage(file);
-                return await uploadImage(compressedImage);
-            } else {
-                await uploadImage(file);
-            }
-        }
-    };
 
     const compressImage = async (file) => {
         return new Promise((resolve, reject) => {
@@ -435,6 +436,7 @@ function VerticalLinearStepper() {
                         uploadTask.on("state_changed", (snapshot) => {
                             const percent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
                             console.log(`Upload is ${percent}% done`);
+                            setLoading(true);
                             handleOpen()
                         }, (err) => console.log(err), () => {
                             getDownloadURL(uploadTask.snapshot.ref).then(async (imageUrl) => {
@@ -466,11 +468,17 @@ function VerticalLinearStepper() {
                                 .then(
 
                                     ()=>{
+                                        setLoading(false);
                                         handleClose()
+                                        setSuccess(true);
                                     }
                                 )
                                 .then(data => {
                                     // Handle response data
+
+                                    setNeedNav(true)
+                                    router.push('/')
+
                                 })
                                 .catch(error => {
                                     // Handle error
@@ -524,14 +532,38 @@ function VerticalLinearStepper() {
                             <Typography>{step.description}</Typography>
                             {step.component}
                             <Box sx={{ mb: 2 }}>
+
                                 <div>
-                                    <Button
+                                    {index === steps.length - 1 ? (<Box sx={{ m: 1, position: 'relative' }}>
+                                        <Fab
+                                            aria-label="save"
+                                            color="primary"
+                                            sx={buttonSx}
+                                            onClick={handleNext}
+                                        >
+                                            {success ? <CheckIcon /> : <SaveIcon />}
+                                        </Fab>
+                                        {loading && (
+                                            <CircularProgress
+                                                size={68}
+                                                sx={{
+                                                    color: "#4caf50",
+                                                    position: 'absolute',
+                                                    top: -6,
+                                                    left: -6,
+                                                    zIndex: 1,
+                                                }}
+                                            />
+                                        )}
+                                    </Box>) : (<Button
                                         variant="contained"
                                         onClick={handleNext}
                                         sx={{ mt: 1, mr: 1 }}
                                     >
-                                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
-                                    </Button>
+                                        Continue
+                                    </Button>)}
+
+
                                     <Button
                                         disabled={index === 0}
                                         onClick={handleBack}
