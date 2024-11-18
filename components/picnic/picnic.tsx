@@ -34,15 +34,15 @@ export default function Picnic() {
                     width={"100%"}
                 />
               <CardFooter className="justify-between  before:bg-pink-600/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl
-              rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10" style={{height:"50px",background:"rgba(177,177,177,0.59)"}}>
+              rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10" style={{height:"50px",background: "rgba(97,140,246,0.56)"}}>
                     <p className="text-large text-blue/80">Available Today.</p>
                     <Button as={Link} href={siteConfig.links.sponsor}
-                            className="text-tiny text-white bg-blue"
+                            className="text-lg text-white bg-blue"
                             variant="shadow"
                             color="secondary" radius="lg" size="lg"
-                            style={{background: "rgba(255,255,255,0.47)"}}
+                            style={{background: "rgba(97,140,246,0.56)"}}
                     >
-                        <SportsSoccer/> Buy Ticket
+                        <SportsSoccer style={{color:"var(--cop-pink)"}}/> Buy Ticket
                     </Button>
                 </CardFooter>
             </Card>
