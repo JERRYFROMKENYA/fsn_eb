@@ -27,6 +27,7 @@ import {
 } from "@/components/icons";
 import { useTheme } from 'next-themes'
 import { Logo,DarkLogo } from "@/components/icons";
+import {SportsSoccer} from "@mui/icons-material";
 
 let needNav =true
 export function setNeedNav(state:boolean){
@@ -95,6 +96,9 @@ export const Navbar = () => {
 					<Link isExternal href={siteConfig.links.instagram} aria-label="Github">
 						<InstagramIcon className="text-default" />
 					</Link>
+					<Link isExternal href={siteConfig.links.sponsor} aria-label="Github">
+						<SportsSoccer className="text-default" />
+					</Link>
 					<ThemeSwitch />
 				</NavbarItem>
 				{/*<NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>*/}
@@ -104,10 +108,10 @@ export const Navbar = () => {
 						as={Link}
 						className="text-sm font-normal text-default-600 bg-default-100"
 						href={siteConfig.links.sponsor}
-						startContent={<HeartFilledIcon className="text-danger" />}
+						startContent={<SportsSoccer className="text-danger" />}
 						variant="flat"
 					>
-						Picnic
+						Match Day Ticket
 					</Button>
 				</NavbarItem>
 			</NavbarContent>

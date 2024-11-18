@@ -67,6 +67,6 @@ export const siteConfig = {
 		linktoJoin:"https://docs.google.com/forms/d/e/1FAIpQLSflLlm9o1twUFiRXBdlPoHOq0xhcerXvmQoRAmuUMEGJ9d1hQ/viewform?usp=sf_link ",
 		github: "https://github.com/nextui-org/nextui",
 		twitter: "https://twitter.com/fanciedstory",
-    sponsor: "https://mypayd.app/product/finding-me-fancied-picnic/"
+    sponsor: "https://paydexp.com/niskizee-match-day"
 	},
 };
