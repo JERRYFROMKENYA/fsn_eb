@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    // EmailJS IDs are public by design; this lets the contact form read them in the browser
+    env: {
+        NEXT_EMAILJS_SERVICEID: process.env.NEXT_EMAILJS_SERVICEID,
+        NEXT_EMAILJS_TEMPLATEID: process.env.NEXT_EMAILJS_TEMPLATEID,
+        NEXT_EMAILJS_PUBLICKEY: process.env.NEXT_EMAILJS_PUBLICKEY,
+    },
     images: {
         remotePatterns: [
           {
